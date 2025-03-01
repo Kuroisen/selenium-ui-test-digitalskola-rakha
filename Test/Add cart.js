@@ -3,6 +3,9 @@ const assert = require("assert");
 const LoginPage = require("../Pages/loginPage")
 const InventoryPage = require("../Pages/InventoryPage")
 const data = require("../Fixture/testData.json")
+const fs = require("fs");
+const path = require("path");
+const { compareScreenshots } = require("../Helper/visualTesting")
 
 describe("Test Add cart SauceDemo", function () {
     before(async function () {
@@ -34,6 +37,23 @@ describe("Test Add cart SauceDemo", function () {
     });
     
     after(async function () {
-        await driver.quit(); 
+        const screenshotDir = path.join(__dirname,"../screenshots")
+                if (!fs.existsSync(screenshotDir)){
+                    fs.mkdirSync(screenshotDir)
+                }
+
+                const testCaseName = this.currentTest.title.replace(/\s+/g,"@")
+                const newImagePath = path.join(screenshotDir, `${testCaseName}_new.png`)
+                const baselinePath = path.join(screenshotDir,`${testCaseName}_baseline.png`)
+
+                const image = await driver.takeScreenshot();
+                fs.writeFileSync(newImagePath,image,"base64")
+
+                if(!fs.existsSync(baselinePath)){
+                    fs.copyFileSync(newImagePath, baselinePath)
+                }
+
+                await compareScreenshots(testCaseName)
+                await driver.quit();
     });
 });

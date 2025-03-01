@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "canvas": "^3.1.0",
     "mocha": "^11.1.0",
     "resemblejs": "^5.0.0",
     "selenium": "^2.20.0",

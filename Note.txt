@@ -1,4 +1,1 @@
-Step run
-1. cukup run file Saucedemologin.js, semua file akan otomatis teruning semua
-2. ketika masuk kedalam keranjang, pada terminal runing akan muncul jumlah barang yang di tambahkan sesuai dengan barang pada cart
-3. ketika masuk kedalam checkout, pada terminal runing akan muncul jumlah barang yang akan di checkout sesuai dengan barang pada cart
+.
